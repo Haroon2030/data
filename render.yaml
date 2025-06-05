@@ -3,7 +3,11 @@ services:
     name: inventory-management
     env: python
     plan: free
-    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput
+    buildCommand: |
+      pip install -r requirements.txt 
+      python manage.py collectstatic --noinput
+      python manage.py makemigrations items --no-input
+      python manage.py migrate --no-input
     startCommand: gunicorn inventory_management.wsgi:application
     envVars:
       - key: PYTHON_VERSION

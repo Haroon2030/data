@@ -87,6 +87,7 @@ WSGI_APPLICATION = 'inventory_management.wsgi.application'
 # استخدام DATABASE_URL إذا كان متاحًا (للإنتاج)، وإلا استخدام SQLite (للتطوير)
 DATABASE_URL = os.environ.get('DATABASE_URL')
 if DATABASE_URL:
+    # تفعيل قاعدة بيانات PostgreSQL من URL
     DATABASES = {
         'default': dj_database_url.config(
             default=DATABASE_URL,
@@ -95,6 +96,7 @@ if DATABASE_URL:
             ssl_require=True,
         )
     }
+    print(f"Using PostgreSQL Database: {DATABASE_URL.split('@')[1] if DATABASE_URL else 'None'}")
 else:
     # الإعداد المحلي (تطوير فقط)
     DATABASES = {
@@ -103,6 +105,7 @@ else:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
+    print("Using SQLite Database")
 
 
 # Password validation
