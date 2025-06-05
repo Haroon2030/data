@@ -8,6 +8,7 @@ services:
       python manage.py collectstatic --noinput
       python manage.py makemigrations items --no-input
       python manage.py migrate --no-input
+      python manage.py create_superuser --no-input
     startCommand: gunicorn inventory_management.wsgi:application
     envVars:
       - key: PYTHON_VERSION
@@ -20,6 +21,12 @@ services:
         value: data-xlqe.onrender.com,localhost,127.0.0.1
       - key: DJANGO_SETTINGS_MODULE
         value: inventory_management.settings
+      - key: DJANGO_SUPERUSER_USERNAME
+        value: admin
+      - key: DJANGO_SUPERUSER_EMAIL
+        value: admin@example.com
+      - key: DJANGO_SUPERUSER_PASSWORD
+        generateValue: true
       - key: DATABASE_URL
         fromDatabase:
           name: mydata-db

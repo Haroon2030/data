@@ -78,11 +78,10 @@ git push -u origin main
   - قاعدة بيانات PostgreSQL باسم "mydata"
 
 ### 4. الترحيلات وإعداد قاعدة البيانات
-- بعد إكمال النشر، يمكنك تشغيل الترحيلات باستخدام وحدة تحكم Shell:
-```bash
-python manage.py migrate
-python manage.py createsuperuser
-```
+- بعد إكمال النشر، سيتم تشغيل الترحيلات وإنشاء مستخدم مشرف تلقائيًا باستخدام متغيرات البيئة المحددة في ملف Render.yaml:
+  - اسم المستخدم: `admin` (يمكن تغييره عبر متغير البيئة DJANGO_SUPERUSER_USERNAME)
+  - البريد الإلكتروني: `admin@example.com` (يمكن تغييره عبر متغير البيئة DJANGO_SUPERUSER_EMAIL)
+  - كلمة المرور: يتم إنشاؤها تلقائيًا ويمكن الوصول إليها من خلال لوحة تحكم Render (متغير البيئة DJANGO_SUPERUSER_PASSWORD)
 
 ```bash
 python manage.py runserver
