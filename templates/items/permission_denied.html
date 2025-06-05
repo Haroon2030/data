@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ title|default:"غير مسموح" }} - نظام إدارة الأصناف{% endblock %}
+
+{% block content %}
+<div class="card border-danger">
+    <div class="card-header bg-danger text-white">
+        <h3>غير مسموح</h3>
+    </div>
+    <div class="card-body">
+        <div class="alert alert-danger" role="alert">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            {{ message|default:"ليس لديك صلاحية للوصول إلى هذه الصفحة." }}
+        </div>
+        
+        <p>يمكن إضافة الأصناف فقط من خلال لوحة الإدارة بواسطة المستخدمين المصرح لهم.</p>
+        
+        <div class="mt-4">
+            <a href="{% url 'item_list' %}" class="btn btn-secondary">العودة إلى القائمة الرئيسية</a>
+            <a href="{% url 'admin:index' %}" class="btn btn-primary">الذهاب إلى لوحة الإدارة</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

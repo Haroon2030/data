@@ -1,0 +1,54 @@
+# ملفات Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+
+# البيئة الافتراضية
+venv/
+env/
+ENV/
+
+# ملفات بيئة التطوير
+.env
+.env.local
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# تجاهل ملفات البيانات والإعدادات المحلية
+*.sqlite3
+*.db
+.env
+.env.*
+!.env.example
+*.log
+
+# ملف الملفات الثابتة المجمعة
+/staticfiles/
+
+# ملفات التوثيق المنشأة
+/docs/_build/
+
+# ملفات التطوير
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# ملفات النظام
+.DS_Store
+Thumbs.db

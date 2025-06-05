@@ -1,0 +1,494 @@
+/* نظام التنسيق العام لإدارة الأصناف */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --primary-color: #667eea;
+    --secondary-color: #764ba2;
+    --accent-color: #6877de;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+    --grey-color: #6c757d;
+    --success-color: #28a745;
+    --info-color: #17a2b8;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+/* تنسيقات عامة */
+body {
+    font-family: 'Cairo', sans-serif;
+    background-color: #f7fafc;
+    color: #333;
+    line-height: 1.6;
+    padding: 0;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* تنسيقات الترويسة */
+.header {
+    background: linear-gradient(to left, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 1.5rem 0;
+    box-shadow: var(--box-shadow);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header h1 {
+    font-weight: 700;
+    margin: 0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.header h1:hover {
+    transform: scale(1.03);
+}
+
+.header .badge {
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* المحتوى الرئيسي */
+.main-content {
+    flex: 1;
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+}
+
+/* تنسيقات الجدول */
+.table-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 1.5rem;
+    position: relative;
+    transition: var(--transition);
+}
+
+.table-container.loading::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: var(--border-radius);
+    z-index: 1;
+}
+
+.table-container.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(102, 126, 234, 0.2);
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    z-index: 2;
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.table-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.btn-group {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-weight: 500;
+    transition: var(--transition);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* تنسيقات خاصة بأزرار التصدير */
+.btn-primary {
+    background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+    border: none;
+}
+
+.btn-outline-primary {
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    background-color: transparent;
+}
+
+.btn-outline-primary:hover {
+    background: rgba(102, 126, 234, 0.1);
+    border-color: var(--accent-color);
+}
+
+.btn-secondary {
+    background: linear-gradient(to right, var(--grey-color), #495057);
+    border: none;
+}
+
+.search-container input {
+    border: 1px solid #ddd;
+    padding: 8px 16px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: var(--transition);
+}
+
+.search-container input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.25);
+}
+
+.table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.table th, .table td {
+    padding: 12px 15px;
+    vertical-align: middle;
+}
+
+.table thead th {
+    background: linear-gradient(to left, #f9f9f9, #f3f3f3);
+    border-bottom: 2px solid #eee;
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+}
+
+.table-bordered th, .table-bordered td {
+    border: 1px solid #e9ecef;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(102, 126, 234, 0.05);
+    box-shadow: inset 0 0 0 1px rgba(102, 126, 234, 0.1);
+}
+
+/* تنسيقات الأعمدة والترتيب */
+.sortable {
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+}
+
+.sortable:hover {
+    background: rgba(102, 126, 234, 0.1);
+}
+
+.sort-icon {
+    margin-right: 5px;
+    font-size: 0.8rem;
+    opacity: 0.6;
+}
+
+.sort-asc .sort-icon, .sort-desc .sort-icon {
+    opacity: 1;
+}
+
+.sortable::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: var(--transition);
+}
+
+.sortable:hover::after {
+    width: 100%;
+}
+
+.sort-asc::after, .sort-desc::after {
+    width: 100%;
+}
+
+/* تنسيقات للصفوف */
+.row-number {
+    font-weight: 600;
+    text-align: center;
+    color: var(--primary-color);
+    background-color: rgba(102, 126, 234, 0.05);
+    width: 50px;
+}
+
+tr.selected {
+    background-color: rgba(102, 126, 234, 0.1);
+}
+
+/* تنسيقات البحث والنتائج */
+.search-results-info {
+    margin: 10px 0;
+    padding: 8px;
+}
+
+.search-highlight {
+    background-color: rgba(255, 193, 7, 0.5);
+    padding: 2px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+.no-results-message {
+    text-align: center;
+    padding: 30px;
+    margin: 20px 0;
+}
+
+.info-badge .badge {
+    padding: 8px 12px;
+    font-weight: 500;
+    border-radius: 20px;
+}
+
+/* تنسيقات التذييل */
+.footer {
+    background-color: #343a40;
+    color: white;
+    padding: 1.5rem 0;
+    text-align: center;
+    margin-top: auto;
+}
+
+.footer p {
+    margin: 0;
+}
+
+.footer .small {
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+/* تأثيرات حركية */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+/* استجابة للشاشات المختلفة */
+@media (max-width: 768px) {
+    .table-toolbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .btn-group, .search-container, .info-badge {
+        margin-bottom: 10px;
+        width: 100%;
+    }
+    
+    .search-container input {
+        width: 100% !important;
+    }
+    
+    .table-responsive {
+        overflow-x: auto;
+    }
+}
+
+/* تنسيقات خاصة بنموذج إدخال صنف جديد */
+.form-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    background-color: #fff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 2rem;
+}
+
+/* تنسيقات ترقيم الصفحات */
+.pagination-container {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.pagination {
+    box-shadow: var(--box-shadow);
+    border-radius: 30px;
+    padding: 5px;
+    background: white;
+    display: inline-flex;
+}
+
+.page-item {
+    margin: 0 3px;
+}
+
+.page-link {
+    border: none;
+    color: var(--dark-color);
+    font-weight: 500;
+    border-radius: 30px !important;
+    min-width: 35px;
+    text-align: center;
+    transition: all 0.3s;
+}
+
+.page-link:hover {
+    background: linear-gradient(90deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+    color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.page-item.active .page-link {
+    background: linear-gradient(to left, var(--primary-color), var(--secondary-color));
+    border-color: transparent;
+    box-shadow: 0 4px 10px rgba(102, 126, 234, 0.4);
+    transform: translateY(-2px);
+}
+
+.page-item.disabled .page-link {
+    color: #aaa;
+    pointer-events: none;
+    background-color: transparent;
+}
+
+/* تطبيق التأثيرات الحركية على أزرار الترقيم */
+.pagination .page-link {
+    position: relative;
+    overflow: hidden;
+}
+
+.pagination .page-link::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 10%, transparent 10.01%) no-repeat 50%;
+    transform: scale(10, 10);
+    opacity: 0;
+    transition: transform 0.5s, opacity 0.5s;
+    top: 0;
+    left: 0;
+}
+
+.pagination .page-link:active::after {
+    transform: scale(0, 0);
+    opacity: 0.3;
+    transition: 0s;
+}
+
+.form-control {
+    border-radius: 6px;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    transition: var(--transition);
+}
+
+/* تنسيقات خاصة بتصدير Excel */
+.excel-export-loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    font-weight: 600;
+}
+
+.excel-export-loading .spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(102, 126, 234, 0.2);
+    border-top: 5px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+}
+
+.excel-export-success {
+    background: linear-gradient(to right, #28a745, #20c997);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-weight: 500;
+    margin-bottom: 15px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
+    transition: opacity 0.5s;
+}
+
+/* رسائل الخطأ المتعلقة بمكتبة Excel */
+.excel-library-error {
+    margin: 1rem 0;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    color: #856404;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    animation: fadeIn 0.5s;
+}
+
+.excel-library-error button {
+    background-color: #e0a800;
+    border-color: #d39e00;
+    color: white;
+    font-weight: 500;
+    border-radius: 4px;
+    padding: 0.25rem 0.5rem;
+    transition: all 0.2s;
+}
+
+.excel-library-error button:hover {
+    background-color: #d39e00;
+}

@@ -1,0 +1,13 @@
+Django==4.2  # استخدام إصدار متوافق مع Python 3.11
+asgiref==3.7.2  
+sqlparse==0.4.4
+tzdata==2023.3
+whitenoise==6.6.0
+gunicorn==21.2.0
+dj-database-url==2.1.0
+psycopg2-binary==2.9.9
+python-dotenv==1.0.0  # لإدارة متغيرات البيئة
+# المكتبات الإضافية التي قد تحتاجها لاحقًا
+# django-cors-headers==4.3.1  # لدعم CORS في حال استخدام واجهة API مع تطبيقات أخرى
+# djangorestframework==3.15.0  # لبناء واجهة برمجة تطبيقات REST كاملة
+# Pillow==10.1.0  # لدعم معالجة الصور

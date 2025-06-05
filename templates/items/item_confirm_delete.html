@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}حذف الصنف - نظام إدارة الأصناف{% endblock %}
+
+{% block content %}
+<div class="card border-danger">
+    <div class="card-header bg-danger text-white">
+        <h3>تأكيد حذف الصنف</h3>
+    </div>
+    <div class="card-body">
+        <p class="lead">هل أنت متأكد من حذف الصنف: <strong>"{{ item.name }}"</strong>؟</p>
+        <p class="text-danger">لا يمكن التراجع عن هذا الإجراء!</p>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <table class="table table-sm">
+                    <tbody>
+                        <tr>
+                            <th>اسم الصنف</th>
+                            <td>{{ item.name }}</td>
+                        </tr>
+                        <tr>
+                            <th>رقم الباركود</th>
+                            <td>{{ item.barcode }}</td>
+                        </tr>
+                        <tr>
+                            <th>الشركة</th>
+                            <td>{{ item.company }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">نعم، قم بالحذف</button>
+            <a href="{% url 'item_detail' item.id %}" class="btn btn-secondary">إلغاء</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

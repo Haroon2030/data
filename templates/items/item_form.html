@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}إضافة صنف جديد - نظام إدارة الأصناف{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header bg-primary text-white">
+        <h3>{{ form_title|default:"إضافة صنف جديد" }}</h3>
+    </div>
+    <div class="card-body">
+        <form method="post" id="itemForm">
+            {% csrf_token %}
+            
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="name" class="form-label">اسم الصنف</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+                
+                <div class="col-md-6 mb-3">
+                    <label for="barcode" class="form-label">رقم الباركود</label>
+                    <input type="text" class="form-control" id="barcode" name="barcode" required>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="package" class="form-label">العبوة</label>
+                    <input type="text" class="form-control" id="package" name="package" required>
+                </div>
+                
+                <div class="col-md-6 mb-3">
+                    <label for="company" class="form-label">الشركة</label>
+                    <input type="text" class="form-control" id="company" name="company" required>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="submitter" class="form-label">المدخل المرسل</label>
+                    <input type="text" class="form-control" id="submitter" name="submitter" required>
+                </div>
+                
+                <div class="col-md-6 mb-3">
+                    <label for="unit" class="form-label">وحدة الصنف</label>
+                    <input type="text" class="form-control" id="unit" name="unit" required>
+                </div>
+            </div>
+            
+            <div class="mt-4">
+                <button type="submit" class="btn btn-primary">حفظ</button>
+                <a href="{% url 'item_list' %}" class="btn btn-secondary">إلغاء</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.getElementById('itemForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+        
+        fetch('{% url "item_create" %}', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                window.location.href = "{% url 'item_list' %}";
+            }
+        });
+    });
+</script>
+{% endblock %}

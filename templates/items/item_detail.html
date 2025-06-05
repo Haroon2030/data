@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ item.name }} - نظام إدارة الأصناف{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header bg-primary text-white">
+        <h3>تفاصيل الصنف: {{ item.name }}</h3>
+    </div>
+    <div class="card-body">
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <h4 class="mb-3">معلومات عامة</h4>
+                <table class="table table-striped">
+                    <tbody>
+                        <tr>
+                            <th>اسم الصنف</th>
+                            <td>{{ item.name }}</td>
+                        </tr>
+                        <tr>
+                            <th>رقم الباركود</th>
+                            <td>{{ item.barcode }}</td>
+                        </tr>
+                        <tr>
+                            <th>العبوة</th>
+                            <td>{{ item.package }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <h4 class="mb-3">معلومات إضافية</h4>
+                <table class="table table-striped">
+                    <tbody>
+                        <tr>
+                            <th>الشركة</th>
+                            <td>{{ item.company }}</td>
+                        </tr>
+                        <tr>
+                            <th>المدخل المرسل</th>
+                            <td>{{ item.submitter }}</td>
+                        </tr>
+                        <tr>
+                            <th>وحدة الصنف</th>
+                            <td>{{ item.unit }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-12">
+                <hr>
+                <h4 class="mb-3">معلومات النظام</h4>
+                <table class="table table-sm">
+                    <tbody>
+                        <tr>
+                            <th>تاريخ الإضافة</th>
+                            <td>{{ item.created_at }}</td>
+                        </tr>
+                        <tr>
+                            <th>آخر تحديث</th>
+                            <td>{{ item.updated_at }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <a href="{% url 'item_list' %}" class="btn btn-secondary">عودة للقائمة</a>
+        <!-- تم إزالة أزرار التعديل والحذف -->
+    </div>
+</div>
+{% endblock %}
+{% endblock %}
