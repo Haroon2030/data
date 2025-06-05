@@ -34,8 +34,8 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-i1$8*-k0te%ef=
 # تعيين DEBUG بناءً على المتغير البيئي
 DEBUG = os.environ.get('DJANGO_DEBUG', 'True').lower() == 'true'
 
-# السماح بجميع المضيفين افتراضيًا أو القراءة من المتغير البيئي
-ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', '*').split(',')
+# السماح بالمضيفين المحددين أو القراءة من المتغير البيئي
+ALLOWED_HOSTS = ['data-xlqe.onrender.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -162,6 +162,10 @@ if not DEBUG:
     SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
+
+# إعدادات CSRF للسماح بالطلبات من موقع Render
+CSRF_TRUSTED_ORIGINS = ['https://data-xlqe.onrender.com']
+
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
